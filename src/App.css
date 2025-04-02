@@ -1,0 +1,448 @@
+:root {
+  --primary-color: #00a86b; /* Professional green */
+  --primary-dark: #008f5b;
+  --primary-light: #4ccea0;
+  --secondary-color: #333333; /* Dark gray (almost black) */
+  --light-color: #ffffff;
+  --light-gray: #f5f5f5;
+  --medium-gray: #e0e0e0;
+  --text-color: #222222;
+  --text-secondary: #555555;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  --border-radius: 8px;
+  --transition: all 0.3s ease;
+}
+
+body {
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+}
+
+.app-logo {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 1rem;
+  display: block;
+  background-image: url('/src/assets/Group 6.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-color);
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-height: 80vh;
+}
+
+/* Header & Navigation */
+header {
+  margin-bottom: 2rem;
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  justify-content: center;
+  background-color: var(--light-gray);
+  padding: 0.5rem;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.tab {
+  padding: 0.8em 1.5em;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  background-color: var(--light-color);
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: var(--transition);
+  border: none;
+}
+
+.tab:hover {
+  background-color: var(--primary-light);
+  color: var(--light-color);
+}
+
+.tab.active {
+  background-color: var(--primary-color);
+  color: var(--light-color);
+}
+
+/* Sections */
+.section {
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  margin-bottom: 2rem;
+}
+
+.section h2 {
+  color: var(--primary-color);
+  border-bottom: 2px solid var(--primary-light);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.section h3 {
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+/* Forms */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--secondary-color);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.8em 1em;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--medium-gray);
+  background-color: var(--light-color);
+  color: var(--text-color);
+  font-size: 1rem;
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(0, 168, 107, 0.2);
+}
+
+/* Buttons */
+button {
+  border-radius: var(--border-radius);
+  border: none;
+  padding: 0.8em 1.5em;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  background-color: var(--primary-color);
+  color: white;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+  transform: translateY(-2px);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button[type="button"] {
+  background-color: var(--light-gray);
+  color: var(--secondary-color);
+}
+
+button[type="button"]:hover {
+  background-color: var(--medium-gray);
+}
+
+button:disabled {
+  background-color: var(--medium-gray);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.button-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+/* Cards */
+.card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.card {
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  text-align: left;
+  position: relative;
+  border-top: 4px solid var(--primary-color);
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-5px);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--secondary-color);
+  font-size: 1.25rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--medium-gray);
+  margin-bottom: 1rem;
+}
+
+.card p {
+  margin: 0.5rem 0;
+  color: var(--text-secondary);
+}
+
+.card strong {
+  color: var(--text-color);
+}
+
+.card-actions {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.card-actions button {
+  padding: 0.4em 0.8em;
+  font-size: 0.9rem;
+}
+
+/* Lists */
+.pet-list, .treatment-list {
+  margin-top: 1.5rem;
+}
+
+.pet-item, .treatment-item {
+  background-color: var(--light-gray);
+  padding: 1.25rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  transition: var(--transition);
+  border-left: 4px solid var(--primary-color);
+}
+
+.pet-item:hover, .treatment-item:hover {
+  background-color: #eef9f4;
+}
+
+/* Messages */
+.error-message {
+  color: #e53935;
+  background-color: rgba(229, 57, 53, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  margin: 1rem 0;
+  font-weight: 500;
+}
+
+.success-message {
+  color: var(--primary-color);
+  background-color: rgba(0, 168, 107, 0.1);
+  padding: 0.75rem 1rem;
+  border-radius: var(--border-radius);
+  margin: 1rem 0;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .card-container {
+    grid-template-columns: 1fr;
+  }
+  
+  .button-group {
+    flex-direction: column;
+  }
+  
+  .tabs {
+    flex-wrap: wrap;
+  }
+  
+  #root {
+    padding: 1rem;
+  }
+}
+
+/* Dashboard Stats */
+.stat {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin: 0.5rem 0;
+}
+
+/* Dark mode overrides */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-light: #4ccea0;
+    --text-color: #2a2a2a;
+    --text-secondary: #3a3a3a;
+    --secondary-color: #2a2a2a;
+  }
+  
+  body {
+    background-color: #ffffff;
+  }
+  
+  .section, .card {
+    background-color: #ffffff;
+  }
+  
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background-color: #ffffff;
+    color: #2a2a2a;
+    border-color: #e0e0e0;
+  }
+  
+  button[type="button"] {
+    background-color: #f0f0f0;
+    color: #2a2a2a;
+  }
+  
+  button[type="button"]:hover {
+    background-color: #e5e5e5;
+  }
+  
+  .pet-item:hover, .treatment-item:hover {
+    background-color: #f9f9f9;
+  }
+}
+
+/* Quick Actions */
+.quick-actions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.quick-action-card {
+  background-color: var(--light-color);
+  border-radius: var(--border-radius);
+  padding: 2rem 1.5rem;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-color);
+  border-top: 4px solid var(--primary-color);
+  text-decoration: none;
+  flex: 1;
+  min-width: 200px;
+  max-width: 300px;
+}
+
+.quick-action-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px);
+  background-color: #f9fffc;
+}
+
+.quick-action-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.quick-action-card h3 {
+  color: var(--primary-color);
+  margin: 0.5rem 0;
+  font-size: 1.5rem;
+}
+
+.quick-action-card p {
+  color: var(--text-secondary);
+  margin: 0.5rem 0 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .quick-action-card:hover {
+    background-color: #f5f5f5;
+  }
+}
