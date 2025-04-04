@@ -1,54 +1,164 @@
-# React + TypeScript + Vite
+# 🐾 Clínica Veterinaria - Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación frontend para la gestión de usuarios, mascotas y tratamientos veterinarios, desarrollada con React y TypeScript.
 
-Currently, two official plugins are available:
+## 📦 Tecnologías utilizadas
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- React 
+- TypeScript
+- React Router DOM
+- Axios
+- CSS
 
-## Expanding the ESLint configuration
+## 🚀 Características principales
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- Gestión completa de usuarios (propietarios de mascotas)
+- Administración de mascotas asociadas a usuarios
+- Registro y seguimiento de tratamientos médicos
+- Interfaz intuitiva con diseño responsive
+- Navegación fluida entre secciones relacionadas
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## 📱 Estructura de la aplicación
+
+La aplicación está organizada en tres secciones principales:
+
+- **Usuarios**: Registro y gestión de propietarios de mascotas
+- **Mascotas**: Administración de mascotas asociadas a usuarios
+- **Tratamientos**: Seguimiento de tratamientos médicos para cada mascota
+
+## 🔧 Configuración del proyecto
+
+### Requisitos previos
+
+- Node.js (v14 o superior)
+- npm o yarn
+- Backend de la Clínica Veterinaria en funcionamiento
+
+### Instalación
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/tu-usuario/clinica-veterinaria-frontend.git
+
+# Entrar al directorio
+cd clinica-veterinaria-frontend
+
+# Instalar dependencias
+npm install
+# o
+yarn install
+
+# Iniciar la aplicación en modo desarrollo
+npm start
+# o
+yarn start
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Configuración de la API
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+La aplicación se conecta a un backend REST. La URL base de la API se configura en el archivo `src/services/apiController.tsx`:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```typescript
+// URL base de la API
+const API_URL = 'http://192.168.251.60:4040/api';
 ```
+
+Modifica esta URL para que apunte a tu servidor backend.
+
+## 📁 Estructura del proyecto
+
+```
+frontend/
+├── src/
+│   ├── components/
+│   │   ├── common/
+│   │   │   └── ConfirmDialog.tsx
+│   │   ├── users/
+│   │   │   ├── UserList.tsx
+│   │   │   └── UserForm.tsx
+│   │   ├── pets/
+│   │   │   ├── PetList.tsx
+│   │   │   └── PetForm.tsx
+│   │   ├── treatments/
+│   │   │   ├── TreatmentList.tsx
+│   │   │   └── TreatmentForm.tsx
+│   │   └── Dashboard.tsx
+│   ├── services/
+│   │   ├── api.tsx
+│   │   └── apiController.tsx
+│   ├── types/
+│   │   └── index.tsx
+│   ├── App.tsx
+│   └── index.tsx
+└── public/
+```
+
+## 🔄 Flujo de trabajo
+
+### Usuarios
+
+- Ver lista de todos los usuarios
+- Crear nuevos usuarios
+- Editar información de usuarios existentes
+- Eliminar usuarios (con confirmación)
+- Ver mascotas asociadas a un usuario específico
+
+### Mascotas
+
+- Ver lista de todas las mascotas
+- Filtrar mascotas por usuario
+- Crear nuevas mascotas (asociadas a un usuario)
+- Editar información de mascotas existentes
+- Eliminar mascotas (con confirmación)
+- Ver tratamientos asociados a una mascota específica
+
+### Tratamientos
+
+- Ver lista de todos los tratamientos
+- Filtrar tratamientos por mascota
+- Crear nuevos tratamientos (asociados a una mascota)
+- Eliminar tratamientos (con confirmación)
+
+## 📊 Dashboard
+
+La aplicación incluye un dashboard que muestra:
+
+- Número total de usuarios registrados
+- Número total de mascotas
+- Número total de tratamientos
+- Usuarios y mascotas añadidos recientemente
+
+## 🌐 Rutas de la aplicación
+
+- `/` - Dashboard principal
+- `/users` - Lista de usuarios
+- `/users/new` - Formulario para crear usuario
+- `/users/edit/:id` - Formulario para editar usuario
+- `/pets` - Lista de todas las mascotas
+- `/pets/new` - Formulario para crear mascota
+- `/pets/edit/:id` - Formulario para editar mascota
+- `/users/:userId/pets` - Mascotas de un usuario específico
+- `/users/:userId/pets/new` - Crear mascota para un usuario específico
+- `/treatments` - Lista de todos los tratamientos
+- `/treatments/new` - Formulario para crear tratamiento
+- `/pets/:petId/treatments` - Tratamientos de una mascota específica
+- `/pets/:petId/treatments/new` - Crear tratamiento para una mascota específica
+
+## 🔌 Servicios API
+
+La aplicación utiliza tres servicios principales para comunicarse con el backend:
+
+- `userService`: Gestión de usuarios
+- `petService`: Gestión de mascotas
+- `treatmentService`: Gestión de tratamientos
+
+Cada servicio proporciona métodos para operaciones CRUD (Crear, Leer, Actualizar, Eliminar).
+
+## 👨‍💻 Autores
+
+- @Fernandodg97
+- @Msedjari10
+
+## 📄 Licencia
+
+CC BY-NC-SA 4.0
