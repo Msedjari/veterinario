@@ -131,8 +131,11 @@ header h1 {
   background-color: var(--light-color);
   border-radius: var(--border-radius);
   padding: 2rem;
-  box-shadow: var(--shadow);
   margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section h2 {
@@ -239,6 +242,9 @@ button:disabled {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .card {
@@ -445,4 +451,11 @@ button:disabled {
   .quick-action-card:hover {
     background-color: #f5f5f5;
   }
+}
+
+/* Dashboard */
+.dashboard {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
 }

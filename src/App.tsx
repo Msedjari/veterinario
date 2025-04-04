@@ -47,7 +47,6 @@ function App() {
             {/* Rutas de Tratamientos */}
             <Route path="/treatments" element={<TreatmentList />} />
             <Route path="/treatments/new" element={<TreatmentForm />} />
-            <Route path="/treatments/edit/:id" element={<TreatmentForm />} />
             <Route path="/pets/:petId/treatments" element={<TreatmentList />} />
             <Route path="/pets/:petId/treatments/new" element={<TreatmentForm />} />
           </Routes>

@@ -120,7 +120,10 @@ const PetForm = () => {
               if (petResponse.fechaNacimiento) {
                 petResponse.fechaNacimiento = convertirFechaParaInput(petResponse.fechaNacimiento);
               }
-              setPet(petResponse as Pet);
+              // Usamos 'as unknown as Pet' para forzar el tipo de petResponse a Pet
+              // Esto es necesario porque la respuesta de la API podría no coincidir exactamente
+              // con la interfaz Pet, pero sabemos que contiene los datos necesarios
+              setPet(petResponse as unknown as Pet);
             } else {
               // Buscar si hay un objeto anidado que podría contener los datos
               const possiblePetFields = ['mascota', 'pet', 'data', 'item', 'result'];
@@ -283,6 +286,13 @@ const PetForm = () => {
             step="0.1"
             value={pet.peso || 0}
             onChange={handleChange}
+            onKeyDown={(e) => {
+              // Permitir teclas numéricas, punto decimal, backspace, delete, flechas, tab
+              const allowedKeys = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', 'Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+              if (!allowedKeys.includes(e.key)) {
+                e.preventDefault();
+              }
+            }}
             required
           />
         </div>

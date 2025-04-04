@@ -122,7 +122,8 @@ const PetList = () => {
           if (userResponse.success && userResponse.data) {
             setUser(userResponse.data);
           } else if (userResponse && !Array.isArray(userResponse)) {
-            setUser(userResponse as User);
+            // Cast to unknown first to avoid type error
+            setUser((userResponse as unknown) as User);
           }
         } else {
           // Obtener todas las mascotas

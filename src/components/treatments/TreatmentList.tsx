@@ -8,6 +8,7 @@ const TreatmentList = () => {
   const { petId } = useParams<{ petId?: string }>();
   const [treatments, setTreatments] = useState<Treatment[]>([]);
   const [pet, setPet] = useState<Pet | null>(null);
+  const [pets, setPets] = useState<Pet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   
@@ -25,26 +26,36 @@ const TreatmentList = () => {
       try {
         let treatmentsData: Treatment[] = [];
         
+        // Obtener todas las mascotas para mostrar sus nombres
+        const allPetsResponse = await petService.getAll();
+        if (allPetsResponse.success && allPetsResponse.data) {
+          setPets(allPetsResponse.data);
+        } else if (Array.isArray(allPetsResponse)) {
+          setPets(allPetsResponse);
+        }
+        
         if (petId) {
           // Obtener tratamientos de una mascota específica
-          const treatmentsResponse = await treatmentService.getByPetId(petId);
-          console.log('Respuesta completa de tratamientos por mascota:', treatmentsResponse);
-          
-          // Extraer datos según el formato de respuesta
-          if (treatmentsResponse.success && treatmentsResponse.data) {
-            treatmentsData = treatmentsResponse.data;
-          } else if (Array.isArray(treatmentsResponse)) {
-            treatmentsData = treatmentsResponse;
-          }
-          
-          // Obtener información de la mascota
           const petResponse = await petService.getById(petId);
-          console.log('Respuesta completa de mascota:', petResponse);
-          
-          if (petResponse.success && petResponse.data) {
+          if (petResponse.success && petResponse.data && petResponse.data.userId) {
+            const treatmentsResponse = await treatmentService.getByPetId(petId, petResponse.data.userId);
+            console.log('Respuesta completa de tratamientos por mascota:', treatmentsResponse);
+            
+            // Extraer datos según el formato de respuesta
+            if (treatmentsResponse.success && treatmentsResponse.data) {
+              treatmentsData = treatmentsResponse.data.map(t => ({
+                ...t,
+                petId: petId // Asegurar que cada tratamiento tenga el petId
+              }));
+            } else if (Array.isArray(treatmentsResponse)) {
+              treatmentsData = treatmentsResponse.map(t => ({
+                ...t,
+                petId: petId
+              }));
+            }
+            
+            // Establecer la información de la mascota
             setPet(petResponse.data);
-          } else if (petResponse && !Array.isArray(petResponse)) {
-            setPet(petResponse as Pet);
           }
         } else {
           // Obtener todos los tratamientos
@@ -118,6 +129,12 @@ const TreatmentList = () => {
     }
   };
 
+  // Función para obtener el nombre de la mascota
+  const getPetName = (mascotaId: string): string => {
+    const matchingPet = pets.find(p => p.id === mascotaId);
+    return matchingPet ? matchingPet.nombre : 'Mascota desconocida';
+  };
+
   if (loading) return <div>Cargando tratamientos...</div>;
   if (error) return <div className="error-message">{error}</div>;
 
@@ -147,14 +164,16 @@ const TreatmentList = () => {
           {treatments.map((treatment, index) => (
             <div key={treatment.id || index} className="card">
               <div className="card-actions">
-                <Link to={`/treatments/edit/${treatment.id}`}>
-                  <button>Editar</button>
-                </Link>
-                <button onClick={() => treatment.id && openConfirmDialog(treatment.id)}>Eliminar</button>
+                <button onClick={() => treatment.id && openConfirmDialog(treatment.id)}>
+                  Eliminar
+                </button>
               </div>
               <h3>{treatment.medicamento}</h3>
               <p><strong>Dosis:</strong> {treatment.dosis}</p>
               <p><strong>Duración:</strong> {treatment.duracion}</p>
+              {!petId && treatment.petId && (
+                <p><strong>Mascota:</strong> {getPetName(treatment.petId)}</p>
+              )}
             </div>
           ))}
         </div>

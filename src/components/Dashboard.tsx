@@ -23,23 +23,45 @@ const Dashboard = () => {
         console.log('Respuesta de usuarios en Dashboard:', usersResponse); // Depuración
         
         if (usersResponse.success && usersResponse.data) {
-          setStats(prev => ({ ...prev, users: usersResponse.data.length }));
+          setStats(prev => ({ ...prev, users: usersResponse.data?.length || 0 }));
+          
+          // Ordenar usuarios por ID (asumiendo que IDs más altos son más recientes)
+          // Si hay un campo de fecha de creación, sería mejor usarlo
+          const sortedUsers = [...usersResponse.data].sort((a, b) => {
+            // Si hay IDs, ordenar por ID de forma descendente
+            if (a.id && b.id) {
+              return b.id.localeCompare(a.id);
+            }
+            return 0;
+          });
+          
           // Mostrar los 3 usuarios más recientes
-          setRecentUsers(usersResponse.data.slice(0, 3));
+          setRecentUsers(sortedUsers.slice(0, 3));
         }
         
         // Obtener mascotas
         const petsResponse = await petService.getAll();
         if (petsResponse.success && petsResponse.data) {
-          setStats(prev => ({ ...prev, pets: petsResponse.data.length }));
+          setStats(prev => ({ ...prev, pets: petsResponse.data?.length || 0 }));
+          
+          // Ordenar mascotas por ID (asumiendo que IDs más altos son más recientes)
+          // Si hay un campo de fecha de creación, sería mejor usarlo
+          const sortedPets = [...petsResponse.data].sort((a, b) => {
+            // Si hay IDs, ordenar por ID de forma descendente
+            if (a.id && b.id) {
+              return b.id.localeCompare(a.id);
+            }
+            return 0;
+          });
+          
           // Mostrar las 3 mascotas más recientes
-          setRecentPets(petsResponse.data.slice(0, 3));
+          setRecentPets(sortedPets.slice(0, 3));
         }
         
         // Obtener tratamientos
         const treatmentsResponse = await treatmentService.getAll();
         if (treatmentsResponse.success && treatmentsResponse.data) {
-          setStats(prev => ({ ...prev, treatments: treatmentsResponse.data.length }));
+          setStats(prev => ({ ...prev, treatments: treatmentsResponse.data?.length || 0 }));
         }
         
         setError(null);
@@ -119,9 +141,11 @@ const Dashboard = () => {
               <div key={user.id} className="card">
                 <h4>{user.nombre} {user.apellido}</h4>
                 <p><strong>Email:</strong> {user.email}</p>
-                <Link to={`/users/edit/${user.id}`}>
-                  <button>Ver detalles</button>
-                </Link>
+                {user.id && (
+                  <Link to={`/users/edit/${user.id}`}>
+                    <button>Ver detalles</button>
+                  </Link>
+                )}
               </div>
             ))}
           </div>
