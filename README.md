@@ -1,3 +1,4 @@
+
 # 🐾 Clínica Veterinaria - Frontend
 
 Aplicación frontend para la gestión de usuarios, mascotas y tratamientos veterinarios, desarrollada con React y TypeScript.
@@ -32,7 +33,7 @@ La aplicación está organizada en tres secciones principales:
 
 - Node.js (v14 o superior)
 - npm o yarn
-- Backend de la Clínica Veterinaria en funcionamiento
+- [@Backend](https://github.com/Fernandodg97/veterinario) de la Clínica Veterinaria en funcionamiento 
 
 ### Instalación
 
@@ -156,9 +157,10 @@ Cada servicio proporciona métodos para operaciones CRUD (Crear, Leer, Actualiza
 
 ## 👨‍💻 Autores
 
-- @Fernandodg97
-- @Msedjari10
+- [@Msedjari10](https://github.com/Msedjari10)
+- [@Fernandodg97](https://github.com/Fernandodg97)
+
 
 ## 📄 Licencia
 
-CC BY-NC-SA 4.0
+[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.es)
